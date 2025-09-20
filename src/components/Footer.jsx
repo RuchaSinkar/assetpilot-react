@@ -1,5 +1,5 @@
 import React from 'react';
-function Footer(){
+function footer(){
     return(
         <footer className="site-footer">
                 <div className="container footer-grid">
@@ -34,4 +34,4 @@ function Footer(){
             </footer>
     )
 }
-export default Footer;
+export default footer;

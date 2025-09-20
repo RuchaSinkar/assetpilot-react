@@ -14,10 +14,14 @@ import MobileApp from "../components/MobileApp";
 import Footer from "../components/footer";
 import Borrow from "../components/Borrow";
 import Lend from "../components/Lend";
+import React, { useState } from "react";  // must import useState
 
 
 function Home(){
-    const navigate=useNavigate();
+    const navigate = useNavigate();
+    const [modalOpen, setModalOpen] = useState(false);
+    const [activeForm, setActiveForm] = useState(null); // "borrow" or "lend"
+
     const buttons = [
     { title: "Borrow", className: "card1", id: "borrowBtn" },
     { title: "Lend", className: "card2", id: "lendBtn" },
@@ -31,6 +35,16 @@ function Home(){
   { img: evolution, gif: evolutionGif, alt: "Evolution", title: "Performance Statistics", name: "Performance Statistics", para: "See how you manage your assets" }
 ];
 
+function openModal(form) {
+    setActiveForm(form);
+    setModalOpen(true);
+  }
+
+  function closeModal() {
+    setModalOpen(false);
+    setActiveForm(null);
+  }
+
     return(
         <>
             <Navbar/>
@@ -43,7 +57,11 @@ function Home(){
                         </p>
                         <button onClick={() => navigate("/dashboard")} className="cta-button">Visit Your Dashboard</button>
                     </div>
-                    <HeroActions buttons={buttons} />
+                    <HeroActions
+                    buttons={buttons}
+                    onButtonClick={(id) => {
+                    if (id === "borrowBtn") openModal("borrow");
+                    else if (id === "lendBtn") openModal("lend");}} />
                 </div>
             </section>
 
@@ -129,13 +147,40 @@ function Home(){
             {/*<!-- FOOTER -->*/}
             <Footer/>
 
-            <div id="modalOverlay" className="overlay">
-            
-            {/*Borrow */}
-            <Borrow/>
-        {/*Lend */}
-            <Lend/>
-            </div>
+            {/* Modal Overlay */}
+      {modalOpen && (
+        <div
+          id="modalOverlay"
+          className="overlay"
+          onClick={(e) => {
+            if (e.target.id === "modalOverlay") closeModal();
+          }}
+          style={{ display: "flex" }}
+        >
+          {/* Conditionally render active form */}
+          {activeForm === "borrow" && <Borrow onClose={closeModal} />}
+          {activeForm === "lend" && <Lend onClose={closeModal} />}
+          {/* Close button 
+          <button
+            className="closeModal"
+            onClick={closeModal}
+            aria-label="Close modal"
+            style={{
+              position: "absolute",
+              top: 20,
+              right: 20,
+              background: "none",
+              border: "none",
+              fontSize: "1.5rem",
+              color: "white",
+              cursor: "pointer",
+            }}
+          >
+            X
+          </button>*/}
+        </div>
+      )}
+      <Footer/>
         </>
     )
 }

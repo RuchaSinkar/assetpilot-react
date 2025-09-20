@@ -1,3 +1,4 @@
+import Signin from "../pages/Signin";
 function Navbar(){
     return(
         <>
@@ -10,7 +11,15 @@ function Navbar(){
                         <a href="dashboard.html">Dashboard</a>
                         <a href="report.html">Report</a>
                         <a href="#">About</a>
-                        <button className="signbtn" onclick="window.location.href='signin.html';"><p>Sign in</p></button>
+                        <button 
+                        className="signbtn" 
+                        onClick={() => {
+                            window.location.href = <Signin/>;
+                        }}
+                        >
+                        <p>Sign in</p>
+                        </button>
+
                     </nav>
                 </div>
             </header>

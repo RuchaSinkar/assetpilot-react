@@ -676,8 +676,8 @@ figcaption{
 .borrow,.lend {
   background-color: #363639;
   color: white;
-  margin: 30rem 10rem;
-  display: none;   /* hide by default */
+  margin: 0rem auto;
+  display: grid;
   grid-template-rows: 1fr 90%;
   padding: 5rem;
   gap: 2.5rem;
