@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import Footer from '../components/footer';
 
 function Dashboard(){
     return(
@@ -114,6 +115,7 @@ function Dashboard(){
                 
 
             </div>
+            <Footer />
         </>
     )
 }

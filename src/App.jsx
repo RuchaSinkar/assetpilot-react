@@ -4,6 +4,9 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
+import Report from './pages/Report' 
+import Signin from './pages/Signin'
+
 function App() {
   const [count, setCount] = useState(0)
 
@@ -11,6 +14,8 @@ function App() {
     <>
       <Home/>
       <Dashboard/>
+      <Report/>
+      <Signin />
     </>
   )
 }

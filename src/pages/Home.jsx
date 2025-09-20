@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import {useNavigate} from "react-router-dom";
+import Footer from '../components/footer';
 
 
 function Home(){
@@ -140,38 +141,7 @@ function Home(){
             </section>
 
 
-            {/*<!-- FOOTER -->*/}
-            <footer className="site-footer">
-                <div className="container footer-grid">
-                    <div>
-                        <h4>Quick Links</h4>
-                        <ul>
-                            <li><a onClick={() => navigate("/dashboard")} className="footer-links">Dashboard</a></li>
-                            <li><a onClick={() => navigate("/")} className="footer-links">About Us</a></li>
-                            <li><a onClick={() => navigate("/")} className="footer-links">Account</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4>Socials</h4>
-                        <ul>
-                            <li><a href="#" className="footer-links">Twitter</a></li>
-                            <li><a href="#" className="footer-links">Instagram</a></li>
-                            <li><a href="#" className="footer-links">LinkedIn</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4>Connect</h4>
-                        <ul>
-                            <li><a href="#" className="footer-links">Email</a></li>
-                            <li><a href="#" className="footer-links">Phone no.</a></li>
-                            <li><a href="#" className="footer-links">Inquiries</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div className="footer-bottom">
-                    <p>&copy; 2025 Asset Pilot. All rights reserved.</p>
-                </div>
-            </footer>
+            <Footer />
 
             <div id="modalOverlay" className="overlay">
             <div className="borrow">
