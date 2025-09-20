@@ -1,9 +1,36 @@
 import Navbar from "../components/Navbar";
 import {useNavigate} from "react-router-dom";
+import HeroActions from "../components/HeroActions";
+import FigureGif from "../components/FigureGif";
+import lineChart from "../images/line-chart.png";
+import lineChartGif from "../images/line-chart.gif";
+import calendar from "../images/calendar.png";
+import calendarGif from "../images/calendar.gif";
+import hourglass from "../images/hourglass.png";
+import hourglassGif from "../images/hourglass.gif";
+import evolution from "../images/evolution.png";
+import evolutionGif from "../images/evolution.gif";
+import MobileApp from "../components/MobileApp";
+import Footer from "../components/Footer";
+import Borrow from "../components/Borrow";
+import Lend from "../components/Lend";
 
 
 function Home(){
     const navigate=useNavigate();
+    const buttons = [
+    { title: "Borrow", className: "card1", id: "borrowBtn" },
+    { title: "Lend", className: "card2", id: "lendBtn" },
+    { title: "View Stats", className: "card3", id: "statsBtn" },
+    { title: "History", className: "card4", id: "historyBtn", path: "/" }
+  ];
+    const figure=[
+  { img: lineChart, gif: lineChartGif, alt: "Line Chart", title: "Asset Tracking", name: "Asset Tracking", para: "Track all assets, not just money" },
+  { img: calendar, gif: calendarGif, alt: "Calendar", title: "Smart Calendar", name: "Smart Calendar", para: "View due dates at a glance" },
+  { img: hourglass, gif: hourglassGif, alt: "Hourglass", title: "History Log", name: "History Log", para: "Access all past transactions easily" },
+  { img: evolution, gif: evolutionGif, alt: "Evolution", title: "Performance Statistics", name: "Performance Statistics", para: "See how you manage your assets" }
+];
+
     return(
         <>
             <Navbar/>
@@ -16,13 +43,7 @@ function Home(){
                         </p>
                         <button onClick={() => navigate("/dashboard")} className="cta-button">Visit Your Dashboard</button>
                     </div>
-
-                    <div className="grid-2">
-                        <button className="hero-card card1" id="borrowBtn"><h3>Borrow</h3></button>
-                        <button className="hero-card card2" id="lendBtn"><h3>Lend</h3></button>
-                        <button className="hero-card card3" id="statsBtn"><h3>View Stats</h3></button>
-                        <button className="hero-card card4" onClick={() => navigate("/")}><h3>History</h3></button>
-                    </div>
+                    <HeroActions buttons={buttons} />
                 </div>
             </section>
 
@@ -33,52 +54,17 @@ function Home(){
                         cash, gold, silver, or utilities. Stay organized, get performance
                         ratings, and manage your asset exchanges with ease</p>
                 </div>
+
+                {/*Annimate images */}
                 <div className="icons">
-                    <figure>
-                        <img className="icon" src="images/line-chart.png" 
-                        data-static="images/line-chart.png" 
-                        data-gif="images/line-chart.gif" alt="Line Chart" width="130" title="Asset Tracking" />
-                        <figcaption>Asset Tracking</figcaption>
-                        <p className="img-des">Track all assets,
-                        not just money</p>
-                    </figure>
-                    
-                    <figure>
-                        <img src="images/calendar.png" className="icon" 
-                        data-static="images/calendar.png"
-                        data-gif="images/calendar.gif" alt="Calendar" width="130" title="Smart Calender" />
-                        <figcaption>Smart Calendar</figcaption>
-                        <p className="img-des">View due dates at
-                        a glance</p>
-                    </figure>
-                    
-                    <figure>
-                        <img src="images/hourglass.png" className="icon" 
-                        data-static="images/hourglass.png"
-                        data-gif="images/hourglass.gif" alt="Hourglass" width="130" title="History Log" />
-                        <figcaption>History Log</figcaption>
-                        <p className="img-des">Access all past
-                        transactions easily</p>
-                    </figure>
-                    
-                    <figure>
-                        <img src="images/evolution.png" className="icon" 
-                        data-static="images/evolution.png"
-                        data-gif="images/evolution.gif" alt="Evolution Chart" width="130" title="Performance Statistics"/>
-                        <figcaption>Performance Statistics</figcaption>
-                        <p className="img-des">See how you manage
-                        your assets</p>
-                    </figure>
-                    
+                    <FigureGif figure={figure} />
                 </div>
                 
             </section>
-            <section className='mobile-app'>
-                <h1 className="title mobile-app-title">We even got our smart phone page as well!</h1>
-                <div className="mobile-app-box">
-                    <img src="images/handphone.png" alt="Mobile App" width="300"/>
-                </div>
-            </section>
+            
+            {/*Mobile App */}
+            <MobileApp/>
+
             {/*<!-- FEATURE SECTION -->*/}
             <section className="features">
                 <div className="container">
@@ -141,151 +127,14 @@ function Home(){
 
 
             {/*<!-- FOOTER -->*/}
-            <footer className="site-footer">
-                <div className="container footer-grid">
-                    <div>
-                        <h4>Quick Links</h4>
-                        <ul>
-                            <li><a onClick={() => navigate("/dashboard")} className="footer-links">Dashboard</a></li>
-                            <li><a onClick={() => navigate("/")} className="footer-links">About Us</a></li>
-                            <li><a onClick={() => navigate("/")} className="footer-links">Account</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4>Socials</h4>
-                        <ul>
-                            <li><a href="#" className="footer-links">Twitter</a></li>
-                            <li><a href="#" className="footer-links">Instagram</a></li>
-                            <li><a href="#" className="footer-links">LinkedIn</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4>Connect</h4>
-                        <ul>
-                            <li><a href="#" className="footer-links">Email</a></li>
-                            <li><a href="#" className="footer-links">Phone no.</a></li>
-                            <li><a href="#" className="footer-links">Inquiries</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div className="footer-bottom">
-                    <p>&copy; 2025 Asset Pilot. All rights reserved.</p>
-                </div>
-            </footer>
+            <Footer/>
 
             <div id="modalOverlay" className="overlay">
-            <div className="borrow">
-                <h1 className="borrow-heading">Record <span className="borrowed-title">Borrowed</span> Assets 
-                    <span className="close-wrap"><button className="closeModal">X</button></span>
-                </h1>
-                
-                <form>
-                    <div className="form-grid">
-                        <div className="field">
-                            <label htmlFor="assetType">Asset Type</label>
-                            <select className="assetType" name="assetType"  required >
-                                <option value="Utility">Utility</option>
-                                <option value="Cash">Cash</option>
-                                <option value="Gold">Gold</option>
-                                <option value="Silver">Silver</option>
-                                <option value="Loan">Loan</option>
-                            </select>
-                        </div>
-                        
-                        <div className="field"> 
-                            <label htmlFor="amount-borrow">Amount</label>
-                            <input type="text" className="amount-borrow" name="amount" required />
-                        </div>
-                        <div className="field">
-                            <label htmlFor="borrowedFrom">Borrowed From</label>
-                            <input type="text" className="borrowedFrom" name="borrowedFrom" required />
-                        </div>
-                        <div className="field">
-                            <label htmlFor="deadline">Deadline:</label>
-                            <input type="date" className="deadline" name="deadline" required />
-                        </div>
-                        
-                        <div className="field">
-                            <label htmlFor="interest">Interest Rate</label>
-                            <input type="text" className="interest" name="interest" required />
-                        </div>
-                        <div className="field">
-                            <label htmlFor="category">Category</label>
-                            <select className="category" name="category"  required >
-                                <option value="emergency">Emergency</option>
-                                <option value="personal">Personal</option>
-                                <option value="investment">Investment</option>
-                                <option value="Loan">Loan</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div className="field note">
-                        <label htmlFor="addNote">Add a Note</label>
-                        <input type="text" className="addNote" name="addNote" placeholder="comment..."/>
-                    </div>
-                    
-                    <div className="submit">
-                        <button className="submit" type="submit">Submit</button>
-                    </div>
-                </form>
-            </div>
-            <div className="lend">
-                <h1 className="lend-heading">Record <span className="lend-title">Lent</span> Asset
-                    <span className="close-wrap"><button className="closeModal">X</button></span>
-                </h1>
-                
-                <form>
-                    <div className="form-grid">
-                        <div className="field">
-                            <label htmlFor="assetType">Asset Type</label>
-                            <select className="assetType" name="assetType"  required >
-                                <option value="Utility">Utility</option>
-                                <option value="Cash">Cash</option>
-                                <option value="Gold">Gold</option>
-                                <option value="Silver">Silver</option>
-                                <option value="Loan">Loan</option>
-                            </select>
-                        </div>
-                        
-                        <div className="field"> 
-                            <label htmlFor="amount-lend">Amount</label>
-                            <input type="text" className="amount-lend" name="amount" required />
-                        </div>
-                        <div className="field">
-                            <label htmlFor="LendTo">Lent to</label>
-                            <input type="text" className="LentTo" name="LentTo" required />
-                        </div>
-                        <div className="field">
-                            <label htmlFor="deadline">Deadline:</label>
-                            <input type="date" className="deadline" name="deadline" required />
-                        </div>
-                        
-                        <div className="field">
-                            <label htmlFor="interest">Interest Rate</label>
-                            <input type="text" className="interest" name="interest" required />
-                        </div>
-                        <div className="field">
-                            <label htmlFor="category">Category</label>
-                            <select id="category" name="category"  required >
-                                <option value="emergency">Emergency</option>
-                                <option value="personal">Personal</option>
-                                <option value="investment">Investment</option>
-                                <option value="loan">Loan</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div className="field note">
-                        <label htmlFor="addNote">Add a Note</label>
-                        <input type="text" className="addNote" name="addNote" placeholder="comment..."/>
-                    </div>
-                    
-                    <div className="submit">
-                        <button className="submit" type="submit">Submit</button>
-                    </div>
-                </form>
-            </div>
+            
+            {/*Borrow */}
+            <Borrow/>
+        {/*Lend */}
+            <Lend/>
             </div>
         </>
     )
