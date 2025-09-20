@@ -11,7 +11,7 @@ import hourglassGif from "../images/hourglass.gif";
 import evolution from "../images/evolution.png";
 import evolutionGif from "../images/evolution.gif";
 import MobileApp from "../components/MobileApp";
-import Footer from "../components/Footer";
+import Footer from "../components/footer";
 import Borrow from "../components/Borrow";
 import Lend from "../components/Lend";
 

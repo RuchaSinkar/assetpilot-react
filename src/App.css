@@ -1361,59 +1361,10 @@ figcaption{
     gap: 20px;
 }
 
-.milestones-wrapper2 {
-    flex: 1;
-    overflow-x: auto; /* Re-enables the horizontal scrollbar */
-    overflow-y: hidden;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-    padding: 20px 0;
-}
 
-.milestones-container2 {
-    display: flex;
-    gap: 20px;
-}
-
-.milestone-card2 {
-    flex: 0 0 calc(33.333% - 13.333px); /* Correctly sizes cards for 3-up display, accounting for gap */
-    scroll-snap-align: start;
-    background: #2a2929;
-    border-radius: 12px;
-    padding: 24px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid black;
-    color: white;
-    width: 5rem;
-}
-
-.milestone-card2:hover {
+.milestone-card4:hover {
     transform: translateY(-8px);
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-}
-
-.milestone-card2 img {
-    width: 100%;
-    height: 15rem;
-    object-fit: contain;
-    border-radius: 8px;
-    margin-bottom: 16px;
-    transition: transform 0.3s ease;
-}
-.milestones-wrapper2::-webkit-scrollbar {
-  height: 8px;
-}
-.milestones-wrapper2::-webkit-scrollbar-track {
-  background: #2b2b2d;
-  border-radius: 10px;
-}
-
-.milestones-wrapper2::-webkit-scrollbar-thumb {
-  background: #7A1CAC;
-  border-radius: 10px;
 }
 
 /* --------------------------------------- Milestone Section type 4--------------------------------------- */
