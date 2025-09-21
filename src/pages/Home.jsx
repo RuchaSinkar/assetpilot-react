@@ -14,13 +14,67 @@ import MobileApp from "../components/MobileApp";
 import Footer from "../components/footer";
 import Borrow from "../components/Borrow";
 import Lend from "../components/Lend";
-import React, { useState } from "react";  // must import useState
+import React, { useState, useEffect, useCallback } from "react";  // must import useState
+import screenshot1 from "../images/screenshot1.png";
+import screenshot2 from "../images/screenshot2.png";
+import screenshot3 from "../images/screenshot3.png";
+import screenshot4 from "../images/screenshot4.png";
+import screenshot5 from "../images/screenshot5.png";
+import screenshot6 from "../images/screenshot6.png";
+
+
+// --- ADDED: Data for the carousel ---
+const screenshots = [
+    screenshot1,
+    screenshot2,
+    screenshot3,
+    screenshot4,
+    screenshot5,
+    screenshot6,
+];
+
+const tutorialSteps = [
+    "#1 Sign up and Set up your account",
+    "#2 Record your Borrowed and Lent Assets",
+    "#3 View your Dashboard to Stay Up to Date",
+    "#4 Collect Badges On Hitting Milestones",
+    "#5 Analyse your Data with Graphs",
+    "#6 Stay Organized with Smart Calendar",
+];
 
 
 function Home(){
     const navigate = useNavigate();
     const [modalOpen, setModalOpen] = useState(false);
     const [activeForm, setActiveForm] = useState(null); // "borrow" or "lend"
+
+    // --- ADDED: Carousel state and logic ---
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const totalSlides = screenshots.length;
+
+    const goToPrevious = useCallback(() => {
+        const newIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        setCurrentIndex(newIndex);
+    }, [currentIndex, totalSlides]);
+
+    const goToNext = useCallback(() => {
+        const newIndex = (currentIndex + 1) % totalSlides;
+        setCurrentIndex(newIndex);
+    }, [currentIndex, totalSlides]);
+
+    const goToSlide = (slideIndex) => {
+        setCurrentIndex(slideIndex);
+    };
+
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === "ArrowLeft") goToPrevious();
+            if (e.key === "ArrowRight") goToNext();
+        };
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [goToPrevious, goToNext]);
+    // --- End of added carousel logic ---
 
     const buttons = [
     { title: "Borrow", className: "card1", id: "borrowBtn" },
@@ -83,13 +137,13 @@ function openModal(form) {
             {/*Mobile App */}
             <MobileApp/>
 
-            {/*<!-- FEATURE SECTION -->*/}
+            {/*<!-- FEATURE SECTION - UPDATED WITH CAROUSEL LOGIC -->*/}
             <section className="features">
                 <div className="container">
                     <h2 className="tutorial-heading">How to use AssetPilot</h2>
 
                     <div className="carousel-container">
-                        <button className="nav-arrow" id="prevBtn">‹</button>
+                        <button className="nav-arrow" onClick={goToPrevious}>‹</button>
 
                     <div className="mockup-container">
                         <img
@@ -98,47 +152,37 @@ function openModal(form) {
                         className="mockup-image"
                         />
                         <div className="mockup-screen">
-                            <div className="screenshots-container" id="screenshotsContainer">
-                                <div className="screenshot">
-                                <img src="images/screenshot1.png" alt="screenshot 1" />
-                                </div>
-                                <div className="screenshot">
-                                <img src="images/screenshot2.png" alt="screenshot 2" />
-                                </div>
-                                <div className="screenshot">
-                                <img src="images/screenshot3.png" alt="screenshot 3" />
-                                </div>
-                                <div className="screenshot">
-                                <img src="images/screenshot4.png" alt="screenshot 4" />
-                                </div>
-                                <div className="screenshot">
-                                <img src="images/screenshot5.png" alt="screenshot 5" />
-                                </div>
-                                <div className="screenshot">
-                                <img src="images/screenshot6.png" alt="screenshot 6" />
-                                </div>
+                            <div className="screenshots-container" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+                                {screenshots.map((src, index) => (
+                                    <div className="screenshot" key={index}>
+                                        <img src={src} alt={`screenshot ${index + 1}`} />
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
 
-                    <button className="nav-arrow" id="nextBtn">›</button>
+                    <button className="nav-arrow" onClick={goToNext}>›</button>
                     </div>
 
                     <div className="dots-indicator" id="dotsIndicator">
-                        <div className="dot active" data-index="0"></div>
-                        <div className="dot" data-index="1"></div>
-                        <div className="dot" data-index="2"></div>
-                        <div className="dot" data-index="3"></div>
-                        <div className="dot" data-index="4"></div>
-                        <div className="dot" data-index="5"></div>
+                        {screenshots.map((_, index) => (
+                            <div
+                                key={index}
+                                className={`dot ${currentIndex === index ? 'active' : ''}`}
+                                onClick={() => goToSlide(index)}
+                            ></div>
+                        ))}
                     </div>
                     <div className="tutorial-steps">
-                        <h3 className="step1">#1 Sign up and Set up your account</h3>
-                        <h3 className="step2">#2 Record your Borrowed and Lent Assets</h3>
-                        <h3 className="step3">#3 View your Dashboard to Stay Up to Date</h3>
-                        <h3 className="step4">#4 Collect Badges On Hitting Milestones</h3>
-                        <h3 className="step5">#5 Analyse your Data with Graphs</h3>   
-                        <h3 className="step6">#6 Stay Organized with Smart Calendar</h3>    
+                        {tutorialSteps.map((step, index) => (
+                            <h3
+                                key={index}
+                                style={{ display: currentIndex === index ? 'block' : 'none' }}
+                            >
+                                {step}
+                            </h3>
+                        ))}
                     </div>
                 </div>
             </section>
@@ -185,3 +229,4 @@ function openModal(form) {
     )
 }
 export default Home;
+
